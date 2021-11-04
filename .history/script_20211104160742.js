@@ -94,28 +94,19 @@ const renderCountry = function (data, className) {
 //   request.open('GET', `https://restcountries.com/v2/name/${country}`);
 //   request.send();
 
-// const request = fetch('https://restcountries.com/v2/name/kenya');
-// console.log(request);
-
-// const getCountryData = function (country) {
-//   fetch(`https://restcountries.com/v2/name/${country}`)
-//     .then(function (response) {
-//       console.log(response);
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       renderCountry(data[0]);
-//     });
-// };
-
-// getCountryData('kenya');
+const request = fetch('https://restcountries.com/v2/name/kenya');
+console.log(request);
 
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(response => response.json())
-
-    .then(data => renderCountry(data[0]));
+    .then(function (response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      renderCountry(data[0]);
+    });
 };
 
 getCountryData('kenya');
