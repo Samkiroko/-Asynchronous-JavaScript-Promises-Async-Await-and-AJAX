@@ -159,7 +159,7 @@ const whereAmI = function (lat, lng) {
       console.log(data);
       console.log(`you are in ${data.city}, ${data.country}`);
     });
-  return fetch(`https://restcountries.com/v2/name/${data.country}`)
+  fetch(`https://restcountries.com/v2/name/${data.country}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Country not found (${response.status})`);
@@ -167,10 +167,10 @@ const whereAmI = function (lat, lng) {
       return response.json();
     })
     .then(data => renderCountry(data[0]))
-    .catch(err => console.error(`${err.message}`));
-  //     .finally(() => {
-  //       countriesContainer.style.opacity = 1;
-  //     });
-};
+    .catch(err => console.error(`${err.message}`))
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
 
 whereAmI(52.508, 13.381);

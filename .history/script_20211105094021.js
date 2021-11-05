@@ -159,7 +159,7 @@ const whereAmI = function (lat, lng) {
       console.log(data);
       console.log(`you are in ${data.city}, ${data.country}`);
     });
-  return fetch(`https://restcountries.com/v2/name/${data.country}`)
+  fetch(`https://restcountries.com/v2/name/${data.country}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Country not found (${response.status})`);

@@ -56,7 +56,7 @@ const renderCountry = function (data, className) {
         </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+  // countriesContainer.style.opacity = 1;
 };
 
 // const getCountryAndNeighbour = function (country) {
@@ -150,27 +150,12 @@ const renderCountry = function (data, className) {
 // challenge
 
 const whereAmI = function (lat, lng) {
-  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-    .then(res => {
-      if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
-      return res.json();
-    })
+  fetch(`https://geocode.xyz${lat},${lng}?geoit=json`)
+    .then(res => res.json())
     .then(data => {
       console.log(data);
       console.log(`you are in ${data.city}, ${data.country}`);
     });
-  return fetch(`https://restcountries.com/v2/name/${data.country}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Country not found (${response.status})`);
-      }
-      return response.json();
-    })
-    .then(data => renderCountry(data[0]))
-    .catch(err => console.error(`${err.message}`));
-  //     .finally(() => {
-  //       countriesContainer.style.opacity = 1;
-  //     });
 };
 
 whereAmI(52.508, 13.381);

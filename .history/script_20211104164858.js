@@ -111,66 +111,23 @@ const renderCountry = function (data, className) {
 
 // getCountryData('kenya');
 
-// const renderError = function (msg) {
-//   countriesContainer.insertAdjacentText('beforeend', msg);
-//   // countriesContainer.style.opacity = 1;
-// };
-
-// const getCountryData = function (country) {
-//   // country one
-//   fetch(`https://restcountries.com/v2/name/${country}`)
-//     .then(response => {
-//       console.log(response);
-//       if (!response.ok) {
-//         throw new Error(`Country not found (${response.status})`);
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       renderCountry(data[0]);
-//       const neighbour = data[0].borders[0];
-//       if (!neighbour) return;
-//       // country two
-//       return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
-//     })
-//     .then(res => res.json())
-//     .then(data => renderCountry(data, 'neighbour'))
-//     .catch(err => {
-//       console.error(`${err}🔥 🔥`);
-//       renderError(`Something went wrong 🔥 🔥 ${err.message}. Try again!`);
-//     })
-//     .finally(() => {
-//       countriesContainer.style.opacity = 1;
-//     });
-// };
-// btn.addEventListener('click', function () {
-//   getCountryData('kenya');
-// });
-
-// challenge
-
-const whereAmI = function (lat, lng) {
-  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-    .then(res => {
-      if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
-      return res.json();
-    })
+const getCountryData = function (country) {
+  // country one
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(
+      response => response.json(),
+      err => alert(err)
+    )
     .then(data => {
-      console.log(data);
-      console.log(`you are in ${data.city}, ${data.country}`);
-    });
-  return fetch(`https://restcountries.com/v2/name/${data.country}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Country not found (${response.status})`);
-      }
-      return response.json();
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0];
+      if (!neighbour) return;
+      // country two
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
     })
-    .then(data => renderCountry(data[0]))
-    .catch(err => console.error(`${err.message}`));
-  //     .finally(() => {
-  //       countriesContainer.style.opacity = 1;
-  //     });
+    .then(res => res.json())
+    .then(data => renderCountry(data, 'neighbour'));
 };
-
-whereAmI(52.508, 13.381);
+btn.addEventListener('click', () => {
+  getCountryData('Ethiopia');
+});
