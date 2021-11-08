@@ -180,37 +180,13 @@ const renderCountry = function (data, className) {
 // Promise.resolve('Resolved promise 1 ').then(res => console.log(res));
 // console.log('Test end ');
 // "editor.occurrencesHighlight": false
-//
-// const lotteryPromise = new Promise(function (resolve, reject) {
-// setTimeout(function () {
-// let rad = Math.random();
-// if (rad >= 0.5) {
-// resolve('You win 💵');
-// } else {
-// reject(new Error('You lost your money 💩'));
-// }
-// console.log(rad);
-// }, 2000);
-// });
-//
-// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
-//
-// promisify setTimeout
-// const wait = function (seconds) {
-// return new Promise(function (resolve) {
-// setTimeout(resolve, seconds * 1000);
-// });
-// };
-//
-// wait(2).then(() => {
-// console.log('I waited for 2 seconds');
-// });
-//
 
-const getPosition = function () {
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-};
+const lotteryPromise = new Promise(function (resolve, reject) {
+  if (Math.random() >= 0.5) {
+    resolve('You win 💵');
+  } else {
+    reject('You lost your money 💩');
+  }
+});
 
-getPosition().then(res => console.log(res));
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
